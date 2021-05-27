@@ -3,8 +3,19 @@
 <head>
 <script>
 alert("you have been pwned");
-  window.location = "https://google.com/";
-parent.document.getElementById("abc").innerHTML = "hacked";
+window.parent.addEventListener('message', function(event) {
+      if(event.origin === 'http://localhost/')
+      {
+        window.document.getElementById("abc").innerHTML = event.data.message;
+      }
+      else
+      {
+        alert('Origin not allowed!');
+      }
+
+    }, false);
+  
+  window.parent.postMessage({message: 'hacked'}, 'http://localhost/');
 </script>
 </head>
 <body>
