@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--<html>
+<head>
+<script>
+urls = [
+  "https://www.youtube.com/embed/auzfTPp4moA", // Heads will Roll
+  "https://www.youtube.com/embed/ZWaFxsUs5_c", // KIZ Hurensohn (RMX)
+  "https://www.youtube.com/embed/ZpNSqtqg-yw", // Frauenarzt Brennt den Club ab
+];
+youtubeUrl = urls[Math.floor(Math.random() * urls.length)];
+document.getElementByClassName("body").innerHTML = '<iframe width="100%" height="100%" src="' + youtubeUrl + '?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+</script>
+</head>
+<body>
+<iframe width="100%" height="100%" src="https://www.youtube.com/embed/auzfTPp4moA?autoplay=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</body>
+</html>-->
+
+<html>
+  <body>
+    <div id="player"></div>
+
+    <script>
+      videoIds = [
+          "auzfTPp4moA", // Heads will Roll
+          "ZWaFxsUs5_c", // KIZ Hurensohn (RMX)
+          "ZpNSqtqg-yw", // Frauenarzt Brennt den Club ab
+      ];
+      
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        videoId = videoIds[Math.floor(Math.random() * videoIds.length)];
+        player = new YT.Player('player', {
+          height: '100%',
+          width: '100%',
+          videoId: videoId,
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.STOPPED) {
+          videoId = videoIds[Math.floor(Math.random() * videoIds.length)];
+          player.loadVideoById(videoId, 0, "large");
+        }
+      }
+    </script>
+  </body>
+</html>
