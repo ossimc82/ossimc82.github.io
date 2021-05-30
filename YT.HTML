@@ -86,13 +86,12 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       }
 
       function onPlayerStateChange(event) {
-        console.log(event.data);
-        if (event.data == -1) {
-          var e = document.getElementById("player");
-          var fs = getFsElem();
-          console.log(fs);
-          e.requestFullscreen().catch(console.log);
-        }
+        
+        var e = document.getElementById("player");
+        var fs = getFsElem();
+        console.log(fs);
+        e.requestFullscreen().catch(console.log);
+        
         if (event.data == YT.PlayerState.ENDED || event.data == YT.PlayerState.PAUSED) {
           videoId = videoIds[rand()];
           event.target.loadVideoById(videoId, 0, "large");
