@@ -60,7 +60,6 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       }
 
       function onPlayerStateChange(event) {
-        alert(event.data);
         if (event.data == YT.PlayerState.ENDED || event.data == YT.PlayerState.PAUSED) {
           videoId = videoIds[Math.floor(Math.random() * videoIds.length)];
           event.target.loadVideoById(videoId, 0, "large");
