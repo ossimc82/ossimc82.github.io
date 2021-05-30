@@ -76,20 +76,21 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
 
       function onPlayerReady(event) {
         event.target.playVideo();
-        
-        var e = document.getElementById("player");
-        if (e.requestFullscreen) {
-          e.requestFullscreen();
-        } else if (e.webkitRequestFullscreen) {
-          e.webkitRequestFullscreen();
-        } else if (e.mozRequestFullScreen) {
-          e.mozRequestFullScreen();
-        } else if (e.msRequestFullscreen) {
-          e.msRequestFullscreen();
-        }
       }
 
       function onPlayerStateChange(event) {
+        if (event.data == -1) {
+          var e = document.getElementById("player");
+          if (e.requestFullscreen) {
+            e.requestFullscreen();
+          } else if (e.webkitRequestFullscreen) {
+            e.webkitRequestFullscreen();
+          } else if (e.mozRequestFullScreen) {
+            e.mozRequestFullScreen();
+          } else if (e.msRequestFullscreen) {
+            e.msRequestFullscreen();
+          } 
+        }
         if (event.data == YT.PlayerState.ENDED || event.data == YT.PlayerState.PAUSED) {
           videoId = videoIds[rand()];
           event.target.loadVideoById(videoId, 0, "large");
