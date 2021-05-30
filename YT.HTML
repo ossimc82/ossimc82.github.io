@@ -23,7 +23,9 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
     <meta http-equiv="Expires" content="0" />
   </head>
   <body>
-    <div id="player"></div>
+    <div id="video-wrapper">
+      <div id="player"></div>
+    </div>
 
     <script>
       videoIds = [
@@ -76,10 +78,16 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
 
       function onPlayerReady(event) {
         event.target.playVideo();
-        var iframe = document.getElementById("player");
-        var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-        if (requestFullScreen) {
-          requestFullScreen.bind(iframe)();
+        
+        var e = document.getElementById("video-wrapper");
+        if (e.requestFullscreen) {
+          e.requestFullscreen();
+        } else if (e.webkitRequestFullscreen) {
+          e.webkitRequestFullscreen();
+        } else if (e.mozRequestFullScreen) {
+          e.mozRequestFullScreen();
+        } else if (e.msRequestFullscreen) {
+          e.msRequestFullscreen();
         }
       }
 
