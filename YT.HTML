@@ -86,6 +86,7 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       }
 
       function onPlayerStateChange(event) {
+        console.log(event.data);
         if (event.data == -1) {
           var e = document.getElementById("player");
           var fs = getFsElem();
