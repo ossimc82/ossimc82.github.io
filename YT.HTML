@@ -77,19 +77,20 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       function onPlayerReady(event) {
         event.target.playVideo();
       }
+      
+      function getFsElem() {
+        return document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.mozFullscreenElement ||
+          document.msFullscreenElement;
+      }
 
       function onPlayerStateChange(event) {
         if (event.data == -1) {
           var e = document.getElementById("player");
-          if (e.requestFullscreen) {
-            e.requestFullscreen();
-          } else if (e.webkitRequestFullscreen) {
-            e.webkitRequestFullscreen();
-          } else if (e.mozRequestFullScreen) {
-            e.mozRequestFullScreen();
-          } else if (e.msRequestFullscreen) {
-            e.msRequestFullscreen();
-          } 
+          var fs = getFsElem();
+          console.log(fs);
+          e.requestFullscreen().catch(console.log);
         }
         if (event.data == YT.PlayerState.ENDED || event.data == YT.PlayerState.PAUSED) {
           videoId = videoIds[rand()];
