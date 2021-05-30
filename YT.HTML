@@ -86,12 +86,6 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       }
 
       function onPlayerStateChange(event) {
-        
-        var e = document.getElementById("player");
-        var fs = getFsElem();
-        console.log(fs);
-        e.requestFullscreen().catch(console.log);
-        
         if (event.data == YT.PlayerState.ENDED || event.data == YT.PlayerState.PAUSED) {
           videoId = videoIds[rand()];
           event.target.loadVideoById(videoId, 0, "large");
@@ -101,6 +95,29 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       function rand() {
         return Math.floor(Math.random() * (new Date().getTime() / 1000)) % videoIds.length;
       }
+      
+      function fs() {
+        var e = document.getElementById("player");
+        var fs = getFsElem();
+        console.log(fs);
+        e.requestFullscreen().catch(console.log);
+      }
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.code === "KeyW" ||
+            e.code === "KeyA" ||
+            e.code === "KeyS" ||
+            e.code === "KeyD")
+          fs();
+      });
+      
+      document.addEventListener('keyup', (e) => {
+        if (e.code === "KeyW" ||
+            e.code === "KeyA" ||
+            e.code === "KeyS" ||
+            e.code === "KeyD")
+          fs();
+      });
     </script>
   </body>
 </html>
