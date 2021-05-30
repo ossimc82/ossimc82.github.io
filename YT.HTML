@@ -63,7 +63,7 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
         alert(event.data);
         if (event.data == YT.PlayerState.STOPPED) {
           videoId = videoIds[Math.floor(Math.random() * videoIds.length)];
-          player.loadVideoById(videoId, 0, "large");
+          event.target.loadVideoById(videoId, 0, "large");
         }
       }
     </script>
