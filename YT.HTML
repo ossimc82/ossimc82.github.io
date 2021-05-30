@@ -76,6 +76,11 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
 
       function onPlayerReady(event) {
         event.target.playVideo();
+        var iframe = document.getElementById("player");
+        var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+        if (requestFullScreen) {
+          requestFullScreen.bind(iframe)();
+        }
       }
 
       function onPlayerStateChange(event) {
