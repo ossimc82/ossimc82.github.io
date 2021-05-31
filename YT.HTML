@@ -86,6 +86,10 @@ document.getElementByClassName("body").innerHTML = '<iframe width="100%" height=
       }
 
       function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+          event.target.unmute();
+          event.target.setVolume(100);
+        }
         if (event.data == YT.PlayerState.ENDED || event.data == YT.PlayerState.PAUSED) {
           videoId = videoIds[rand()];
           event.target.loadVideoById(videoId, 0, "large");
